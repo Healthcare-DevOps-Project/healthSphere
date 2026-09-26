@@ -1,5 +1,5 @@
 variable "floci_endpoint" {
   description = "Floci endpoint"
   type        = string
-  default     = "http://localhost:4566"
+  default     = "http://floci:4566"
 }
