@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('GitHub Trigger Test') {
             steps {
-                echo 'GitHub push successfully triggered Jenkins!'
+                echo 'GitHub push successfully triggered Jenkins! - Day 7'
             }
         }
     }
