@@ -25,6 +25,19 @@ pipeline {
             }
         }
 
+       stage('SonarQube Analysis') {
+        steps {
+        dir('backend') {
+            withSonarQubeEnv('SonarQube') {
+                sh '''
+                    mvn sonar:sonar \
+                      -Dsonar.projectKey=healthsphere-backend
+                '''
+            }
+        }
+    }
+}
+
         stage('Docker Build') {
             steps {
                 dir('backend') {
