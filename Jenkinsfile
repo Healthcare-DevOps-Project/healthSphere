@@ -43,7 +43,7 @@ stage('SonarQube Analysis') {
                 dir('backend') {
                     sh '''
                         docker build \
-                          -t healthsphere-backend:1.0.0 \
+                          -t healthsphere-backend:${IMAGE_TAG} \
                           .
                     '''
                 }
@@ -53,7 +53,7 @@ stage('SonarQube Analysis') {
         stage('Docker Image Validation') {
             steps {
                 sh '''
-                    docker image inspect healthsphere-backend:1.0.0
+                    docker image inspect healthsphere-backend:${IMAGE_TAG}
                 '''
             }
         }
@@ -62,8 +62,8 @@ stage('SonarQube Analysis') {
             steps {
                 sh '''
                     docker tag \
-                      healthsphere-backend:1.0.0 \
-                      host.docker.internal:5100/healthsphere-backend:1.0.0
+                      healthsphere-backend:${IMAGE_TAG} \
+                      host.docker.internal:5100/healthsphere-backend:${IMAGE_TAG}
                 '''
             }
         }
@@ -72,7 +72,7 @@ stage('SonarQube Analysis') {
             steps {
                 sh '''
                     docker push \
-                      host.docker.internal:5100/healthsphere-backend:1.0.0
+                      host.docker.internal:5100/healthsphere-backend:${IMAGE_TAG}
                 '''
             }
         }
