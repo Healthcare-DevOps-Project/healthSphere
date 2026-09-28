@@ -25,12 +25,12 @@ pipeline {
             }
         }
 
-       stage('SonarQube Analysis') {
-        steps {
+ stage('SonarQube Analysis') {
+    steps {
         dir('backend') {
             withSonarQubeEnv('SonarQube') {
                 sh '''
-                    mvn sonar:sonar \
+                    mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
                       -Dsonar.projectKey=healthsphere-backend
                 '''
             }
