@@ -97,6 +97,7 @@ pipeline {
                       -H "Content-Type: application/json" \
                       --data '{"text":"HealthSphere CI/CD -> FAILURE"}' \
                       "$SLACK_WEBHOOK"
+                '''
             }
         }
     }
