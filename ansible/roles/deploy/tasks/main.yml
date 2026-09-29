@@ -1,0 +1,26 @@
+---
+- name: Install Docker Python dependency
+  ansible.builtin.apt:
+    name:
+      - python3-requests
+    state: present
+    update_cache: true
+
+- name: Pull HealthSphere backend image
+  community.docker.docker_image:
+    name: "{{ docker_registry }}/healthsphere-backend:{{ image_tag }}"
+    source: pull
+
+- name: Stop existing HealthSphere backend container
+  community.docker.docker_container:
+    name: healthsphere-backend
+    state: absent
+
+- name: Start HealthSphere backend container
+  community.docker.docker_container:
+    name: healthsphere-backend
+    image: "{{ docker_registry }}/healthsphere-backend:{{ image_tag }}"
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "8080:8080"
