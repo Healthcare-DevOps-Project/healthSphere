@@ -1,0 +1,8 @@
+---
+- name: Configure HealthSphere application server
+  hosts: webservers
+  become: true
+
+  roles:
+    - docker
+    - nginx
