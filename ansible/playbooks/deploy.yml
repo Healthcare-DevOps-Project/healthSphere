@@ -1,0 +1,7 @@
+---
+- name: Deploy HealthSphere application
+  hosts: webservers
+  become: true
+
+  roles:
+    - deploy
