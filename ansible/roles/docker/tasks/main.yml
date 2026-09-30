@@ -13,11 +13,6 @@
       - docker.io
     state: present
 
-- name: Enable and start Docker
-  ansible.builtin.service:
-    name: docker
-    state: started
-    enabled: true
 
 - name: Add ansible user to docker group
   ansible.builtin.user:
