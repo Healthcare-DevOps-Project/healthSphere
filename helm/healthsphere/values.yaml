@@ -9,7 +9,7 @@ backend:
 
   image:
     repository: host.docker.internal:5100/healthsphere-backend
-    tag: "1.0.50"
+    tag: "1.0.49"
     pullPolicy: IfNotPresent
 
   service:
