@@ -26,24 +26,6 @@ spec:
               protocol: TCP
 
           env:
-            - name: DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.existingSecret }}
-                  key: database-name
-
-            - name: DATABASE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.existingSecret }}
-                  key: database-username
-
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.existingSecret }}
-                  key: database-password
-
             - name: ENVIRONMENT
               valueFrom:
                 configMapKeyRef:
@@ -52,3 +34,4 @@ spec:
 
           resources:
 {{ toYaml .Values.backend.resources | indent 12 }}
+
