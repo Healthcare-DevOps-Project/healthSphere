@@ -5,8 +5,33 @@
     state: present
     update_cache: true
 
-- name: Enable and start Nginx
+- name: Deploy HealthSphere Nginx configuration
+  ansible.builtin.template:
+    src: healthsphere.conf
+    dest: /etc/nginx/sites-available/healthsphere.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Enable HealthSphere Nginx site
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/healthsphere.conf
+    dest: /etc/nginx/sites-enabled/healthsphere.conf
+    state: link
+    force: true
+
+- name: Disable default Nginx site
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Validate Nginx configuration
+  ansible.builtin.command:
+    cmd: nginx -t
+  changed_when: false
+
+- name: Enable and restart Nginx
   ansible.builtin.service:
     name: nginx
-    state: started
+    state: restarted
     enabled: true
